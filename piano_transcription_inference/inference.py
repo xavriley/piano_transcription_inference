@@ -15,13 +15,14 @@ from . import config
 
 class PianoTranscription(object):
     def __init__(self, model_type='Note_pedal', checkpoint_path=None, 
-        segment_samples=16000*10, device=torch.device('cuda')):
+        segment_samples=16000*10, batch_size=1, device=torch.device('cuda')):
         """Class for transcribing piano solo recording.
 
         Args:
           model_type: str
           checkpoint_path: str
           segment_samples: int
+          batch_size: int
           device: 'cuda' | 'cpu'
         """
         if not checkpoint_path: 
@@ -43,6 +44,7 @@ class PianoTranscription(object):
         self.offset_threshod = 0.3
         self.frame_threshold = 0.1
         self.pedal_offset_threshold = 0.2
+        self.batch_size = batch_size
 
         # Build model
         Model = eval(model_type)
@@ -86,7 +88,7 @@ class PianoTranscription(object):
         """(N, segment_samples)"""
 
         # Forward
-        output_dict = forward(self.model, segments, batch_size=1)
+        output_dict = forward(self.model, segments, batch_size=self.batch_size)
         """{'reg_onset_output': (N, segment_frames, classes_num), ...}"""
 
         # Deframe to original length
