@@ -29,7 +29,7 @@ class PianoTranscription(object):
             checkpoint_path='{}/piano_transcription_inference_data/note_F1=0.9677_pedal_F1=0.9186.pth'.format(str(Path.home()))
         print('Checkpoint path: {}'.format(checkpoint_path))
 
-        if not os.path.exists(checkpoint_path) or os.path.getsize(checkpoint_path) < 1.6e8:
+        if not os.path.exists(checkpoint_path):
             create_folder(os.path.dirname(checkpoint_path))
             print('Total size: ~165 MB')
             zenodo_path = 'https://zenodo.org/record/4034264/files/CRNN_note_F1%3D0.9677_pedal_F1%3D0.9186.pth?download=1'
