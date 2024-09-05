@@ -19,5 +19,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=['matplotlib', 'mido', 'librosa', 'torchlibrosa==0.0.9'],
-    python_requires='>=3.6',
+    python_requires='^3.9',
 )
