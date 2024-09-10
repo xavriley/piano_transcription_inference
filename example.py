@@ -1,3 +1,13 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "librosa",
+#     "mido",
+#     "numpy",
+#     "torch",
+#     "torchlibrosa",
+# ]
+# ///
 import os
 import argparse
 import torch
