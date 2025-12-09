@@ -14,8 +14,16 @@ from . import config
 
 
 class PianoTranscription(object):
-    def __init__(self, model_type='Note_pedal', checkpoint_path=None, 
-        segment_samples=16000*10, batch_size=1, device=torch.device('cuda')):
+    def __init__(self, 
+        model_type='Note_pedal', 
+        checkpoint_path=None, 
+        device=torch.device('cuda'),
+        segment_samples=16000*10, 
+        batch_size=1,
+        onset_threshold=0.3,
+        offset_threshold=0.3,
+        frame_threshold=0.1,
+        pedal_offset_threshold=0.2):
         """Class for transcribing piano solo recording.
 
         Args:
@@ -40,10 +48,10 @@ class PianoTranscription(object):
         self.segment_samples = segment_samples
         self.frames_per_second = config.frames_per_second
         self.classes_num = config.classes_num
-        self.onset_threshold = 0.3
-        self.offset_threshod = 0.3
-        self.frame_threshold = 0.1
-        self.pedal_offset_threshold = 0.2
+        self.onset_threshold = onset_threshold
+        self.offset_threshod = offset_threshold
+        self.frame_threshold = frame_threshold
+        self.pedal_offset_threshold = pedal_offset_threshold
         self.batch_size = batch_size
 
         # Build model
