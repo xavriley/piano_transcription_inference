@@ -64,7 +64,7 @@ class PianoTranscription(object):
         self.model.load_state_dict(checkpoint['model'], strict=False)
 
         # Parallel
-        if 'cuda' in str(device):
+        if 'cuda' in str(device) or 'mps' in str(device):
             self.model.to(device)
             print('GPU number: {}'.format(torch.cuda.device_count()))
             self.model = torch.nn.DataParallel(self.model)
